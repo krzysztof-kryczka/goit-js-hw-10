@@ -8,8 +8,9 @@ const API_BASE_URL = 'https://api.thecatapi.com/v1';
 //Function to fetch the list of cat breeds
 const fetchBreeds = async () => {
   try {
-    await axios.get(`${API_BASE_URL}/breeds`).then(response => {
+   return await axios.get(`${API_BASE_URL}/breeds`).then(response => {
       console.log(response.data);
+      return response.data
     });
   } catch (error) {
         if (error.response) {
