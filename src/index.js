@@ -1,4 +1,4 @@
-import { fetchBreeds } from './js/cat-api';
+import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
 
@@ -35,3 +35,30 @@ fetchBreeds()
 function onFetchError(error) {
   console.error('Error fetching data: ', error);
 }
+
+const onSelectBreed = e => {
+
+  const selected = e.target.selectedOptions[0];
+  console.log(
+    `${e.currentTarget.selectedIndex}, ${selected.text}, ${selected.value}`
+  );
+
+  fetchCatByBreed(selected.value)
+    .then(response => {
+      console.log(response);
+
+      obj.description.innerHTML = `
+      <div>
+        <img src="${response[0].url}" alt="${response[0].breeds[0].name}" width="400"/>
+      </div>
+      <div>
+        <h1>${response[0].breeds[0].name}</h1>
+        <p>${response[0].breeds[0].description}</p>
+        <p><strong>Temperament:</strong> ${response[0].breeds[0].temperament}</p>
+      </div>`;
+
+    })
+    .catch(onFetchError);
+};
+
+obj.breedSelect.addEventListener('change', onSelectBreed);
