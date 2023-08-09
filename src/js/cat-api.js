@@ -1,41 +1,40 @@
 import axios from 'axios';
+import { obj } from './index';
 
-const AUTH_TOKEN = 'live_av59dyFJMFB4kPyWbQ7wtxUtY8B3KXY1HCkaYlLt3vIGMr51p1qtop2WRDg2xaPY';
+const AUTH_TOKEN =
+  'live_av59dyFJMFB4kPyWbQ7wtxUtY8B3KXY1HCkaYlLt3vIGMr51p1qtop2WRDg2xaPY';
 axios.defaults.headers.common['x-api-key'] = AUTH_TOKEN;
 
-const API_BASE_URL = 'https://api.thecatapi.com/v1';
+const API_BASE_URL = 'https://api.thecatapi.com/v1a';
 
 //Function to fetch the list of cat breeds
 const fetchBreeds = async () => {
   try {
-   return await axios.get(`${API_BASE_URL}/breeds`).then(response => {
+    return await axios.get(`${API_BASE_URL}/breeds`).then(response => {
       console.log(response.data);
-      return response.data
+      obj.breedSelect.classList.remove('is-hidden');
+      return response.data;
     });
   } catch (error) {
-        if (error.response) {
-            // The request was made and the server responded with a status code
-            console.log(error.response);
-          } else if (error.request) {
-            // The request was made but no response was received
-            console.log(error.request);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error);
-          }
+    onAxiosError(error);
   }
 };
 
 //Function to fetch the list of cat breeds
-const fetchCatByBreed = async (idBreed) => {
+const fetchCatByBreed = async idBreed => {
   try {
     return await axios
       .get(`${API_BASE_URL}/images/search?breed_ids=${idBreed}`)
       .then(response => {
         console.log(response.data);
+        obj.description.classList.remove('is-hidden');
         return response.data;
       });
   } catch (error) {
+    onAxiosError(error);
+  }
+
+  function onAxiosError(error) {
     if (error.response) {
       // The request was made and the server responded with a status code
       console.log(error.response);
