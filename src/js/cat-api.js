@@ -5,7 +5,7 @@ const AUTH_TOKEN =
   'live_av59dyFJMFB4kPyWbQ7wtxUtY8B3KXY1HCkaYlLt3vIGMr51p1qtop2WRDg2xaPY';
 axios.defaults.headers.common['x-api-key'] = AUTH_TOKEN;
 
-const API_BASE_URL = 'https://api.thecatapi.com/v1a';
+const API_BASE_URL = 'https://api.thecatapi.com/v1';
 
 //Function to fetch the list of cat breeds
 const fetchBreeds = async () => {
