@@ -27,7 +27,9 @@ const fetchCatByBreed = async idBreed => {
       .get(`${API_BASE_URL}/images/search?breed_ids=${idBreed}`)
       .then(response => {
         console.log(response.data);
-        obj.description.classList.remove('is-hidden');
+        if (response.data[0].breeds != Array.isArray('[]')) {
+          obj.description.classList.remove('is-hidden');
+        }
         return response.data;
       });
   } catch (error) {

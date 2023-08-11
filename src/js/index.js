@@ -61,6 +61,7 @@ const onSelectBreed = e => {
   fetchCatByBreed(selected.value)
     .then(response => {
       obj.description.innerHTML = `
+      <div class="group-div">
       <div>
         <img src="${response[0].url}" alt="${response[0].breeds[0].name}" width="400"/>
       </div>
@@ -68,6 +69,7 @@ const onSelectBreed = e => {
         <h1>${response[0].breeds[0].name}</h1>
         <p>${response[0].breeds[0].description}</p>
         <p><strong>Temperament:</strong> ${response[0].breeds[0].temperament}</p>
+      </div>
       </div>`;
       Loading.remove();
     })
