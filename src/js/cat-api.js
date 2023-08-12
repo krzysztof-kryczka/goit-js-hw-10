@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { obj } from './index';
 
 const AUTH_TOKEN =
   'live_av59dyFJMFB4kPyWbQ7wtxUtY8B3KXY1HCkaYlLt3vIGMr51p1qtop2WRDg2xaPY';
@@ -12,7 +11,6 @@ const fetchBreeds = async () => {
   try {
     return await axios.get(`${API_BASE_URL}/breeds`).then(response => {
       console.log(response.data);
-      obj.breedSelect.classList.remove('is-hidden');
       return response.data;
     });
   } catch (error) {
@@ -27,9 +25,6 @@ const fetchCatByBreed = async idBreed => {
       .get(`${API_BASE_URL}/images/search?breed_ids=${idBreed}`)
       .then(response => {
         console.log(response.data);
-        if (response.data[0].breeds != Array.isArray('[]')) {
-          obj.description.classList.remove('is-hidden');
-        }
         return response.data;
       });
   } catch (error) {

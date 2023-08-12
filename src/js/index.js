@@ -5,7 +5,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import 'notiflix/dist/notiflix-3.2.6.min.css';
 
-export const obj = {
+const obj = {
   breedSelect: document.querySelector('.breed-select'),
   loader: document.querySelector('.loader'),
   error: document.querySelector('.error'),
@@ -23,6 +23,7 @@ const arrayBreedsId = [];
 fetchBreeds()
   .then(response => {
     response.forEach(element => {
+      obj.breedSelect.classList.remove('is-hidden');
       console.log(element);
       arrayBreedsId.push(
         `<option value="${element.id}">${element.name}</option>`
@@ -52,7 +53,7 @@ function onFetchError(error) {
 }
 
 const onSelectBreed = e => {
-  Loading.standard('Loading data, please wait...');
+  Loading.hourglass('Loading data, please wait...');
   const selected = e.target.selectedOptions[0];
   console.log(
     `${e.currentTarget.selectedIndex}, ${selected.text}, ${selected.value}`
@@ -72,6 +73,7 @@ const onSelectBreed = e => {
       </div>
       </div>`;
       Loading.remove();
+      obj.description.classList.remove('is-hidden');
     })
     .catch(onFetchError);
 };
